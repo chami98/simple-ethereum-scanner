@@ -4,13 +4,14 @@ import { useState } from 'react';
 
 function App() {
 
-  const [ethAddress, setEthAddress] = useState("");
+  const [ethAddress, setEthAddress] = useState('');
   const [responseData, setResponseData] = useState([]);
 
   // let ethAddress =  0x2c1ba59d6f58433fb1eaee7d20b26ed83bda51a3
 
   const submitHandler = async () => {
-    const response = await fetch(`https://api.etherscan.io/api?module=account&action=txlistinternal&address=${ethAddress}&startblock=0&endblock=2702578&page=1&offset=10&sort=asc&apikey=77YYM4VXFPMMKIAMMWZWCPC9EXHAVRNA6X`);
+    // const response = await fetch(`https://api.etherscan.io/api?module=account&action=txlistinternal&address=${ethAddress}&startblock=0&endblock=2702578&page=1&offset=10&sort=asc&apikey=77YYM4VXFPMMKIAMMWZWCPC9EXHAVRNA6X`);
+    const response = await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${ethAddress}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=77YYM4VXFPMMKIAMMWZWCPC9EXHAVRNA6X`);
     const data = await response.json();
     setResponseData(data);
     await console.log(responseData);
@@ -44,7 +45,7 @@ function App() {
       }}>Submit</button>
 
       {
-        responseData.status == 1 ? (<div className='table-responsive'><table class="table table-striped" style={{ maxWidth: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+        responseData.status == 1 ? (<div className='table-responsive'><table className="table table-striped" style={{ maxWidth: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
           <thead>
             <tr>
               <th scope="col">BlockNumber</th>
